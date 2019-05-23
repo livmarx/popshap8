@@ -1,0 +1,9 @@
+To do next:
+
+  1. Single Client/Product/User view
+  2. Update single Client/Product/User
+  3. Search functionality for all Client/Product/User
+  4. Sort functionality for all Client/Product/User
+  5. SignUp / firebase auth
+  6. Log in / Log out
+  7. Route Gaurds
