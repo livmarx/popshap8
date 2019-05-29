@@ -2,7 +2,7 @@
   <div id="app">
     <Navbar />
     <div class="non-nav">
-      <Sidebar />
+      <Sidebar v-if="user"/>
       <router-view/>
     </div>
   </div>
@@ -11,8 +11,23 @@
 <script>
 import Navbar from '@/components/layout/Navbar';
 import Sidebar from '@/components/layout/Sidebar';
+import firebase from 'firebase';
 export default {
   name: 'App',
+  data() {
+    return {
+      user: null,
+    };
+  },
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.user = user;
+      } else {
+        this.user = null;
+      }
+    });
+  },
   components: {
     Navbar,
     Sidebar,

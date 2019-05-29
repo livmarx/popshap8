@@ -6,6 +6,16 @@
         Add New User
       </button>
     </router-link> -->
+     <!-- sort by: -->
+
+        <button @click="sortAZ('username')">
+          <span>Name: A-Z</span>
+        </button>
+         <button @click="sortZA('username')">
+          <span>Name: Z-A</span>
+        </button>
+
+
     <div class="users-grid">
       <div class="card" v-for="(user, i) in users" :key="i">
         <div class="card-contnet">
@@ -64,6 +74,22 @@ export default {
           });
         });
       console.log(id);
+    },
+    sortAZ(sortType) {
+      console.log(sortType);
+      this.users.sort((a, b) => {
+        if (a[sortType] && b[sortType]) {
+          return a[sortType].toLowerCase() < b[sortType].toLowerCase() ? -1 : 1;
+        }
+      });
+    },
+    sortZA(sortType) {
+      console.log(sortType);
+      this.users.sort((a, b) => {
+        if (a[sortType] && b[sortType]) {
+          return a[sortType].toLowerCase() < b[sortType].toLowerCase() ? 1 : -1;
+        }
+      });
     },
   },
   created() {

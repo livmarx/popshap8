@@ -6,6 +6,13 @@
         Add New Product
       </button>
     </router-link>
+     <!-- Sort by: -->
+        <button @click="sortAZ('clientName')">
+          <span>Client Name: A-Z</span>
+        </button>
+         <button @click="sortZA('clientName')">
+          <span>Client Name: Z-A</span>
+        </button>
     <div class="products-grid">
       <div class="card" v-for="(product, i) in products" :key="i">
         <div class="card-contnet">
@@ -73,6 +80,22 @@ export default {
           });
         });
       console.log(id);
+    },
+    sortAZ(sortType) {
+      console.log(sortType);
+      this.products.sort((a, b) => {
+        if (a[sortType] && b[sortType]) {
+          return a[sortType].toLowerCase() < b[sortType].toLowerCase() ? -1 : 1;
+        }
+      });
+    },
+    sortZA(sortType) {
+      console.log(sortType);
+      this.products.sort((a, b) => {
+        if (a[sortType] && b[sortType]) {
+          return a[sortType].toLowerCase() < b[sortType].toLowerCase() ? 1 : -1;
+        }
+      });
     },
   },
   created() {

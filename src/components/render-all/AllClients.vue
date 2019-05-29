@@ -6,7 +6,13 @@
         Add New Client
       </button>
     </router-link>
-
+ <!-- sort by: -->
+        <button @click="sortAZ('name')">
+          <span>Name: A-Z</span>
+        </button>
+         <button @click="sortZA('name')">
+          <span>Name: Z-A</span>
+        </button>
     <div class="clients-grid">
     <div class="card" v-for="(client, i) in clients" :key="i">
       <div class="card-contnet">
@@ -60,6 +66,38 @@ export default {
           });
         });
       console.log(id);
+    },
+    sortAZ(sortType) {
+      console.log(sortType);
+      this.clients.sort((a, b) => {
+        if (a[sortType] && b[sortType]) {
+          return a[sortType].toLowerCase() < b[sortType].toLowerCase() ? -1 : 1;
+        }
+      });
+    },
+    sortZA(sortType) {
+      console.log(sortType);
+      this.clients.sort((a, b) => {
+        if (a[sortType] && b[sortType]) {
+          return a[sortType].toLowerCase() < b[sortType].toLowerCase() ? 1 : -1;
+        }
+      });
+    },
+  },
+  computed: {
+    filteredResults: function() {
+      let search = this.searchInput.seachString.toLowerCase();
+      return this.clients.filter(client => {
+        if (
+          (client.name && client.name.toLowerCase().match(search)) ||
+          (client.email && client.email.toLowerCase().match(search)) ||
+          (client.phone && client.phone.toLowerCase().match(search))
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
     },
   },
   created() {
